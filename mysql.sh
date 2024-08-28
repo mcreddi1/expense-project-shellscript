@@ -32,6 +32,8 @@ VALIDATE(){
     fi
 }
 
+echo "script started runnig at : $(date)"
+
 CHECK_ROOT
 
 dnf install mysql-server -y
