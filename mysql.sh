@@ -48,12 +48,20 @@ VALIDATE $? "starting mysql server"
 mysql -h mysql.devops81s.shop -u root -pExpenseApp@1 -e 'show databases;'
 if [ $? -ne 0 ]
 then 
-     echo "root pass is not set, setting up now"
-     mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOG_FILE
+     echo "root pass is not set, setting up now" &>>$LOG_FILE
+     mysql_secure_installation --set-root-pass ExpenseApp@1 
      VALIDATE $? "setting the root password"
 else
 
     echo "root password is already set, skipping now"
 fi
 
-
+#mysql -h mysql.daws81s.online -u root -pExpenseApp@1 -e 'show databases;' &>>$LOG_FILE
+#if [ $? -ne 0 ]
+#then
+#    echo "MySQL root password is not setup, setting now" &>>$LOG_FILE
+#    mysql_secure_installation --set-root-pass ExpenseApp@1
+#    VALIDATE $? "Setting UP root password"
+#else
+#    echo -e "MySQL root password is already setup...$Y SKIPPING $N" | tee -a $LOG_FILE
+#fi
