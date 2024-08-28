@@ -45,7 +45,7 @@ VALIDATE $? "validate mysql server"
 systemctl restart mysqld &>>$LOG_FILE
 VALIDATE $? "starting mysql server"
 
-mysql -h mysql.devops81s.shop -u root -pExpenseApp@1 -e 'show databases;'
+mysql -h mysql.devops81s.shop -u root -pExpenseApp@1 -e 'show databases;'  &>>$LOG_FILE
 if [ $? -ne 0 ]
 then 
      echo "root pass is not set, setting up now" &>>$LOG_FILE
