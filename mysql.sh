@@ -32,20 +32,20 @@ VALIDATE(){
     fi
 }
 
-echo "script started runnig at : $(date)"
+echo "script started runnig at : $(date)" | tee -a $LOG_FILE
 
 CHECK_ROOT
 
-dnf install mysql-server -y
+dnf install mysql-server -y &>>$LOG_FILE
 VALIDATE $? "installing mysql server"
 
-systemctl enable mysqld
+systemctl enable mysqld  &>>$LOG_FILE
 VALIDATE $? "validate mysql server"
 
-systemctl restart mysqld
+systemctl restart mysqld &>>$LOG_FILE
 VALIDATE $? "starting mysql server"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1
+mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOG_FILE
 VALIDATE $? "setting up root password"
 
 
